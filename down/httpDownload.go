@@ -58,14 +58,14 @@ func (h *HttpDownloader) Download() {
 	defer f.Close()
 
 	if h.AcceptRanges == false {
-		fmt.Println("该文件不支持多线程下载，单线程下载中：")
+		//fmt.Println("该文件不支持多线程下载，单线程下载中：")
 		resp, err := http.Get(h.url)
 		check(err)
 		save2file(h.filename, 0, resp)
 	} else {
 		var wg sync.WaitGroup
 		for _, ranges := range h.Split() {
-			fmt.Printf("多线程下载中:%d-%d\n", ranges[0], ranges[1])
+			//fmt.Printf("多线程下载中:%d-%d\n", ranges[0], ranges[1])
 			wg.Add(1)
 			go func(start, end int) {
 				defer wg.Done()
